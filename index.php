@@ -1,3 +1,13 @@
+<?php
+    require ('session.php');
+    require ('db_connect.php');
+
+    $name = $_SESSION["user_name"];
+    $ID = $_SESSION["user_ID"];
+    $role = ucfirst($_SESSION["user_role"]);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,10 +33,10 @@
                 <div id="user-info">
                     <div id="picture-content">
                         <img id="user_picture" src="images/user_profile2.png" alt="user_img">
-                        <h3 id="user-name">User</h3>
+                        <h3 id="user-name"><?php echo $name; ?></h3>
                     </div>
-                    <p id="user-id">User12345</p>      
-                    <p id="user-role">Admin</p>             
+                    <p id="user-id"><?php echo $ID; ?></p>      
+                    <p id="user-role"><?php echo $role; ?></p>             
                 </div>
                 
                 <div id="user-navigation">
@@ -63,7 +73,7 @@
                             </a>                   
                         </li>
                         <li>
-                            <a href="login.php">
+                            <a href="logout.php">
                                 <img src="images/logout.png" alt="logout">
                                 Logout
                             </a>
