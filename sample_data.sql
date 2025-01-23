@@ -32,7 +32,7 @@ CREATE TABLE `admin` (
     FOREIGN KEY (`user_ID`) REFERENCES `user`(`user_ID`) ON DELETE CASCADE
 );
 
-ALTER TABLE `admin` AUTO_INCREMENT = 80000;
+ALTER TABLE `admin` AUTO_INCREMENT = 80001;
 
 
 -- --------------------------------------------------------
@@ -47,7 +47,7 @@ CREATE TABLE `student` (
     FOREIGN KEY (`user_ID`) REFERENCES `user`(`user_ID`) ON DELETE CASCADE
 );
 
-ALTER TABLE `student` AUTO_INCREMENT = 10000;
+ALTER TABLE `student` AUTO_INCREMENT = 10001;
 
 
 -- --------------------------------------------------------
@@ -61,7 +61,7 @@ CREATE TABLE `supervisor` (
     FOREIGN KEY (`user_ID`) REFERENCES `user`(`user_ID`) ON DELETE CASCADE
 );
 
-ALTER TABLE `supervisor` AUTO_INCREMENT = 50000;
+ALTER TABLE `supervisor` AUTO_INCREMENT = 50001;
 
 
 -- --------------------------------------------------------
@@ -73,14 +73,14 @@ CREATE TABLE `proposal` (
     `student_name` VARCHAR(40) NOT NULL,
     `student_ID` INT(10) UNSIGNED NOT NULL,
     `specialization` VARCHAR(20) NOT NULL CHECK (`specialization` IN ('Computer Science','Cybersecurity','Game Development','Data Science','Software Engineering','Information System')),
-    `project_title` VARCHAR(50) NOT NULL,
-    `supervisor_name` VARCHAR(20) NOT NULL,
+    `project_title` VARCHAR(100) NOT NULL,
+    `supervisor_name` VARCHAR(40) NOT NULL,
     `supervisor_ID` INT(10) UNSIGNED NOT NULL,
-    `co_supervisor_name` VARCHAR(20),
+    `co_supervisor_name` VARCHAR(40),
     `proposed_by` VARCHAR(10) NOT NULL CHECK (`proposed_by` IN ('Student', 'Lecture', 'Industry')),
-    `project_type` VARCHAR(20) NOT NULL CHECK (`project_type` IN ('Application', 'Research', 'Application and Research')),
+    `project_type` VARCHAR(50) NOT NULL CHECK (`project_type` IN ('Application', 'Research', 'Application and Research')),
     `project_specialization` VARCHAR(20) NOT NULL CHECK (`project_specialization` IN ('Computer Science','Cybersecurity','Game Development','Data Science','Software Engineering','Information System')),
-    `project_category` VARCHAR(50) NOT NULL,
+    `project_category` VARCHAR(100) NOT NULL,
     `industry_collaboration` VARCHAR(3) NOT NULL CHECK (`industry_collaboration` IN ('yes', 'no')),
     `file_address` VARCHAR(100) NOT NULL,
     `proposal_status` VARCHAR(10) NOT NULL CHECK (`proposal_status` IN ('approve', 'pending')),
@@ -96,10 +96,10 @@ CREATE TABLE `proposal` (
 
 CREATE TABLE `meeting_record` (
     `meeting_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `meeting_title` VARCHAR(20) NOT NULL,
+    `meeting_title` VARCHAR(50) NOT NULL,
     `meeting_date` DATE NOT NULL,
     `meeting_time` TIME NOT NULL,
-    `meeting_desc` VARCHAR(50) NOT NULL,
+    `meeting_desc` VARCHAR(100) NOT NULL,
     `student_ID` INT(10) UNSIGNED NOT NULL,
     `supervisor_ID` INT(10) UNSIGNED NOT NULL,
     PRIMARY KEY (`meeting_ID`),
@@ -108,7 +108,7 @@ CREATE TABLE `meeting_record` (
 );
 
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 -- Table structure for table `meeting_log`
 --
 
@@ -121,13 +121,13 @@ CREATE TABLE `meeting_log`(
 );
 
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 -- Table structure for table `announcement`
 --
 
 CREATE TABLE `announcement`(
     `announcement_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `post_by` VARCHAR(10) NOT NULL,
+    `post_by` VARCHAR(40) NOT NULL,
     `announcement_title` VARCHAR(40) NOT NULL,
     `announcement_content` VARCHAR(100) NOT NULL,
     `admin_ID` INT(10) UNSIGNED NOT NULL,
@@ -136,13 +136,13 @@ CREATE TABLE `announcement`(
 );
 
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 -- Table structure for table `event`
 --
 
 CREATE TABLE `event`(
     `event_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `post_by` VARCHAR(10) NOT NULL,
+    `post_by` VARCHAR(40) NOT NULL,
     `event_date` DATE NOT NULL,
     `event_title` VARCHAR(40) NOT NULL,
     `admin_ID` INT(10) UNSIGNED NOT NULL,
@@ -151,7 +151,7 @@ CREATE TABLE `event`(
 );
 
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 -- Table structure for table `goal_and_progress`
 --
 
@@ -167,7 +167,7 @@ CREATE TABLE `goal_and_progress`(
 );
 
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 -- Table structure for table `assessment`
 --
 
@@ -184,9 +184,9 @@ CREATE TABLE `assessment`(
 );
 
 
----
---- ----------------------- DUMPING DATA -------------------------
----
+--
+-- ----------------------- DUMPING DATA -------------------------
+--
 
 -- user data
 INSERT INTO `user` (`user_name`, `user_password`, `user_email`, `user_phone`, `user_role`) VALUES
@@ -264,7 +264,7 @@ INSERT INTO `proposal` (
      'no', 'proposal//cryptography_proposal.pdf', 'approve'),
 
     ('Eva', 10003, 'Game Development', 'Immersive Game Design for Virtual Reality', 
-     'Karen', 50003, 'Leo', 'Student', 
+     'Karen', 50003, 'Leo', 'Student',
      'Application', 'Game Development', 'Game Design Prototyping (GDP)', 
      'no', 'proposal//VR_game_design_proposal.pdf', 'pending'),
 
@@ -299,13 +299,13 @@ INSERT INTO `proposal` (
      'no', 'proposal/transaction_processing_proposal.pdf', 'approve'),
 
     ('Kai', 10010, 'Software Engineering', 'Investigation and Analysis of Software Vulnerabilities', 
-     'Jhon', 5006, 'Jack', 'Student', 
+     'Jhon', 50006, 'Jack', 'Student', 
      'Research', 'Software Engineering', 'Investigation and Analysis', 
      'no', 'proposal/software_vulnerabilities_proposal.pdf', 'pending');
 
 -- meeting_record data
 INSERT INTO `meeting_record` (
-    `meeting_title`, `meeting_date`, `meeting_time`, `meeting_desc`, `student_ID`, `supervisor_ID`\
+    `meeting_title`, `meeting_date`, `meeting_time`, `meeting_desc`, `student_ID`, `supervisor_ID`
 ) VALUES
     ('Project Kickoff', '2025-01-15', '10:00:00', 'Discussed project scope and deliverables', 10001, 50001),
     ('Cryptography Research Update', '2025-01-16', '14:00:00', 'Reviewed initial research findings', 10002, 50002),
@@ -329,14 +329,13 @@ INSERT INTO `meeting_log` (
 INSERT INTO `announcement` (
     `post_by`, `announcement_title`, `announcement_content`, `admin_ID`
 ) VALUES
-    (`Camellya`, `FYP MEETING LOG`, `Student Must Submit Meeting Log by 3th December`, 80004);
-
+    ('Camellya', 'FYP MEETING LOG', 'Student Must Submit Meeting Log by 3rd December', 80004);
 
 -- event data
 INSERT INTO `event` (
    `post_by`, `event_date`, `event_title`, `admin_ID`
 ) VALUES
-    (`Alice`, `2024-02-21`, `FYP TIPS SHARING WORKSHOP`, 80001)
+    ('Alice', '2024-02-21', 'FYP TIPS SHARING WORKSHOP', 80001);
 
 
 -- goal_and_progress data
