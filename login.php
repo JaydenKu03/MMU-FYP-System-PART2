@@ -14,7 +14,7 @@
         <br>
         <br>
         <h1>FCI FYP Login</h1>
-        <form action="login_function.php" method="POST">
+        <form action="function/login_function.php" method="POST">
             <div class="form-group">
                 <label for="user_ID">User ID</label> 
                 <input type="text" id="user_ID" name="user_ID" placeholder="Enter your ID" required>

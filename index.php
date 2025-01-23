@@ -1,6 +1,6 @@
 <?php
-    require ('session.php');
-    require ('db_connect.php');
+    require ('function/session.php');
+    require ('function/db_connect.php');
 
     $name = $_SESSION["user_name"];
     $ID = $_SESSION["user_ID"];
@@ -23,7 +23,7 @@
 
 <body>
     <?php
-        include "template/navbar.php";
+        require "template/navbar.php";
     ?>
 
     <main>
@@ -73,7 +73,7 @@
                             </a>                   
                         </li>
                         <li>
-                            <a href="logout.php">
+                            <a href="function/session_end.php">
                                 <img src="images/logout.png" alt="logout">
                                 Logout
                             </a>
@@ -84,98 +84,18 @@
 
             <div id="center-panel">
                 <div id="operation-content">
-                    <!-- Admin  -->
-                    <div class="operation-task">
-                        <a href="approved_list.php">
-                            <img src="images/approved.png" alt="approved_list">
-                            <p>Approved Project</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="pending_list.php">
-                            <img src="images/pending.png" alt="pending_list">
-                            <p>Pending Project</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="student_list.php">
-                            <img src="images/student.png" alt="student_list">
-                            <p>Student List</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="admin_register.php"><img src="images/register.png" alt="registration">
-                            <p>Account Registration</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="announcement.php"><img src="images/announcement.png" alt="registration">
-                            <p>Announcement & Event</p>
-                        </a>
-                    </div>
 
-                    <!-- Supervisor -->
-                    <div class="operation-task">
-                        <a href="approved_list.php">
-                            <img src="images/approved.png" alt="approved_list">
-                            <p>Approved Project</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="supervised.php">
-                            <img src="images/supervised.png" alt="pending_list">
-                            <p>Supervised Student</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="meeting_sv.php">
-                            <img src="images/submit_meeting.png" alt="pending_list">
-                            <p>Meeting Management</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="goals_sv.php">
-                            <img src="images/goal_and_progress.png" alt="student_list">
-                            <p>Goal and Progress</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="proposal_submission.php">
-                            <img src="images/submit_proposal.png" alt="registration">
-                            <p>Proposal Submission</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="assessment.php">
-                            <img src="images/submit_assesstment.png" alt="registration">
-                            <p>Assesstment Submission</p>
-                        </a>
-                    </div>
-                    
-                    <!-- Student -->
-                    <div class="operation-task">
-                        <a href="approved_list.php">
-                            <img src="images/approved.png" alt="approved_list">
-                            <p>Approved Project</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="meeting.php">
-                            <img src="images/submit_meeting.png" alt="pending_list">
-                            <p>Meeting Management</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="goals.php">
-                            <img src="images/goal_and_progress.png" alt="student_list">
-                            <p>Goal and Progress</p>
-                        </a>
-                    </div>
-                    <div class="operation-task">
-                        <a href="proposal_submission.php"><img src="images/submit_proposal.png" alt="registration">
-                            <p>Proposal Submission</p>
-                        </a>
-                    </div>
+                    <?php
+                        if($role == "Admin"){
+                            include("template/main_admin.php");
+                        }
+                        elseif($role == "Supervisor"){
+                            include("template/main_supervisor.php");
+                        }
+                        else{
+                            include("template/main_student.php");
+                        }
+                    ?>
                 </div>
 
                 <h2>Annoucement Board</h2>
