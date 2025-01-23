@@ -16,7 +16,7 @@
         <h1>FCI FYP Login</h1>
         <form action="/login" method="POST">
             <div class="form-group">
-                <label for="username">User ID</label>
+                <label for="username">User ID</label> 
                 <input type="text" id="username" name="username" placeholder="Enter your username" required>
 
                 <label for="password">Password</label>
@@ -24,7 +24,7 @@
             </div>
             <button type="submit" class="login-button">Login</button>
             <br /><br>
-            <p id="loginSignup">Don't have an account? <a href="student_register.html" id="SignUp">Sign up</a></p>
+            <p id="loginSignup">Don't have an account? <a href="student_register.php" id="SignUp">Sign up</a></p>
         </form>
     </div>
 </body>

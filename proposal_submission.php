@@ -26,12 +26,12 @@
 
             <label for="specialization">Specialization</label>
             <select name="speacilization" id="specialization" required>
-                <option value="computerScience">Computer Science</option>
-                <option value="cyberSecurity">Cybersecurity</option>
-                <option value="gameDevelopment">Game Development</option>
-                <option value="dataScience">Data Science</option>
-                <option value="softwareEnginering">Software Enginering</option>
-                <option value="informationSystem">Information System</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Game Development">Game Development</option>
+                <option value="Data Science">Data Science</option>
+                <option value="Software Enginering">Software Enginering</option>
+                <option value="Information System">Information System</option>
             </select>
 
             <label for="title">Project Title</label>
@@ -40,50 +40,53 @@
             <label for="supervisor">Supervisor Name</label>
             <input type="text" id="supervisor" name="supervisor" required />
 
+            <label for="supervisor_id">Supervisor ID</label>
+            <input type="text" id="supervisor_id" name="supervisor_id" required />
+
             <label for="cosupervisor">Co-Supervisor Name</label>
             <input type="text" id="cosupervisor" name="cosupervisor" />
 
             <label for="status">Proposed By:</label>
             <select id="status" name="status" required>
-                <option value="student-propose">Student-proposed</option>
-                <option value="lecture-propose">Lecture-proposed</option>
-                <option value="industry-propose">Industry-proposed</option>
+                <option value="Student">Student-proposed</option>
+                <option value="Lecture">Lecture-proposed</option>
+                <option value="Industry">Industry-proposed</option>
             </select>
 
             <label for="type">Project Type</label>
             <select name="type" id="type" required>
-                <option value="application-based">Application-based</option>
-                <option value="research-based">Research-based</option>
-                <option value="applicationNreseach-based">Application and Reseach-based</option>
+                <option value="Application">Application-based</option>
+                <option value="Research">Research-based</option>
+                <option value="Application and Research">Application and Reseach-based</option>
             </select>
 
-            <label for="specialization">Project Specialization</label>
-            <select name="speacilization" id="specialization" required>
-                <option value="computerScience">Computer Science</option>
-                <option value="cyberSecurity">Cybersecurity</option>
-                <option value="gameDevelopment">Game Development</option>
-                <option value="dataScience">Data Science</option>
-                <option value="softwareEnginering">Software Enginering</option>
-                <option value="informationSystem">Information System</option>
+            <label for="project_specialization">Project Specialization</label>
+            <select name="project_speacilization" id="project_specialization" required>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Game Development">Game Development</option>
+                <option value="Data Science">Data Science</option>
+                <option value="Software Enginering">Software Enginering</option>
+                <option value="Information System">Information System</option>
             </select>
 
             <label for="category">Project Category</label>
             <select name="category" id="category" required>
-                <option value="CriticalSystem">Critical System</option>
-                <option value="">Application Software</option>
-                <option value="">Software Tools & Utilities</option>
-                <option value="">Service Oriented Computing</option>
-                <option value="">Data Engineering</option>
-                <option value="">Data Analytics</option>
-                <option value="">Cryptography and Data Security</option>
-                <option value="">Investigation and Analysis</option>
-                <option value="">Security and Defence</option>
-                <option value="">Game Software Development (GSD)</option>
-                <option value="">Game Algorithm Research (GAR)</option>
-                <option value="">Game Design Prototyping (GDP)</option>
-                <option value="">IT Infrastructure</option>
-                <option value="">Transaction Processing Systems</option>
-                <option value="">Intelligent Systems</option>
+                <option value="Critical System">Critical System</option>
+                <option value="Application Software">Application Software</option>
+                <option value="Software Tools & Utilities">Software Tools & Utilities</option>
+                <option value="Service Oriented Computing">Service Oriented Computing</option>
+                <option value="Data Engineering">Data Engineering</option>
+                <option value="Data Analytics">Data Analytics</option>
+                <option value="Cryptography and Data Security">Cryptography and Data Security</option>
+                <option value="Investigation and Analysis">Investigation and Analysis</option>
+                <option value="Security and Defence">Security and Defence</option>
+                <option value="Game Software Development (GSD)">Game Software Development (GSD)</option>
+                <option value="Game Algorithm Research (GAR)">Game Algorithm Research (GAR)</option>
+                <option value="Game Design Prototyping (GDP)">Game Design Prototyping (GDP)</option>
+                <option value="IT Infrastructure">IT Infrastructure</option>
+                <option value="Transaction Processing Systems">Transaction Processing Systems</option>
+                <option value="Intelligent Systems">Intelligent Systems</option>
             </select>
 
             <label for="industry">Industry Collaboration</label>

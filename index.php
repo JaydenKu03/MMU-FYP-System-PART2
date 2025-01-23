@@ -105,7 +105,7 @@
                     </div>
 
                     <!-- Supervisor -->
-                    <!-- <div class="operation-task">
+                    <div class="operation-task">
                         <a href="approved_list.php">
                             <img src="images/approved.png" alt="approved_list">
                             <p>Approved Project</p>
@@ -140,10 +140,10 @@
                             <img src="images/submit_assesstment.png" alt="registration">
                             <p>Assesstment Submission</p>
                         </a>
-                    </div> -->
+                    </div>
                     
                     <!-- Student -->
-                    <!-- <div class="operation-task">
+                    <div class="operation-task">
                         <a href="approved_list.php">
                             <img src="images/approved.png" alt="approved_list">
                             <p>Approved Project</p>
@@ -165,7 +165,7 @@
                         <a href="proposal_submission.php"><img src="images/submit_proposal.png" alt="registration">
                             <p>Proposal Submission</p>
                         </a>
-                    </div> -->
+                    </div>
                 </div>
 
                 <h2>Annoucement Board</h2>

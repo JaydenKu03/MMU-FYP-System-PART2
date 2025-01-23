@@ -17,9 +17,6 @@
             <label for="name">Student Name</label>
             <input type="text" id="name" name="name" placeholder="John Smith" required />
 
-            <label for="id">Student ID</label>
-            <input type="text" id="id" name="id" placeholder="0123456789" required />
-
             <label for="email">Password</label>
             <input type="password" id="password" name="password" required />
 
