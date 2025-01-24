@@ -1,20 +1,24 @@
 <?php
-    require ('function/session.php');
+    require("function/session.php");
     require ('function/db_connect.php');
 
-    $conn = OpenCon();
+    if($_SESSION['user_role'] != "admin") {
+        die("You Don't Have Access To This Page");
+    }
+
+    $conn = openCon();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/base.css">
     <link rel="stylesheet" href="static/profile.css">
     <link rel="stylesheet" href="static/reusable.css">
-    <title>My Profile</title>
+    <title>View Profile</title>
 </head>
 
 <body>
@@ -25,46 +29,37 @@
     <div id="content-container">
         <div id="my-profile">
             <img src="images/user_profile.png">
-            <h1 class="title-font" id="user-name"> <?php echo $_SESSION["user_name"]; ?> </h1>
+            <h1 class="title-font" id="user-name"> <?php echo $_GET['name'] ?></h1>
         </div>
 
         <div id="information-container">
-            <!-- Genreal Render -->
+
             <?php
-                if($_SESSION["user_role"] == "admin") {
-                    $sql = "SELECT a.admin_ID, u.user_name, u.user_email, u.user_phone FROM user u
-                            JOIN admin a ON u.user_ID = a.user_ID
-                            WHERE a.admin_ID = '" . $_SESSION["user_ID"] . "'";
-                }
-                else if($_SESSION["user_role"] == "supervisor") {
+                if($_GET["role"] == "supervisor") {
                     $sql = "SELECT s.supervisor_ID, u.user_name, u.user_email, u.user_phone FROM user u
                             JOIN supervisor s ON u.user_ID = s.user_ID
-                            WHERE s.supervisor_ID = '" . $_SESSION["user_ID"] . "'";
+                            WHERE s.supervisor_ID = '" . $_GET["id"] . "'";
                 }
                 else {
                     $sql = "SELECT s.student_ID, s.specialization, u.user_name, u.user_email, u.user_phone FROM user u
                             JOIN student s ON u.user_ID = s.user_ID
-                            WHERE s.student_ID = '" . $_SESSION["user_ID"] . "'";
+                            WHERE s.student_ID = '" . $_GET["id"] . "'";
                 }
 
                 $result = $conn->query($sql);
                 $rowcount = mysqli_num_rows($result);
                 $row = mysqli_fetch_array($result);
-
-                if($rowcount != 1){
-                    echo "<script>alert('Information retrieve error'); window.location.href='index.php';</script>";
-                }
-
             ?>
-            
+
+            <!-- Genreal Render -->
             <section id="user-details">
                 <h2>User Details</h2>
                 <h3>ID</h3>
-                <p> <?php echo $_SESSION["user_ID"]; ?> </p>
+                <p> <?php echo $_GET["id"]; ?> </p>
                 <h3>Role</h3>
-                <p> <?php echo ucfirst($_SESSION["user_role"]); ?> </p>
+                <p> <?php echo ucfirst($_GET["role"]); ?> </p>
                 <?php
-                    if($_SESSION["user_role"] == "student"){
+                    if($_GET["role"] == "student"){
                         echo "<h3>Specialization</h3>
                               <p>".$row['specialization']."</p>";
                     }
@@ -77,11 +72,11 @@
 
             <!-- Supervisor Render -->
             <?php
-                if($_SESSION["user_role"] == "supervisor"){
+                if($_GET["role"] == "supervisor"){
                     $sql = "SELECT s.student_ID, u.user_name FROM user u
                     JOIN student s ON u.user_ID = s.user_ID
                     JOIN proposal p ON s.student_ID = p.student_ID
-                    WHERE p.supervisor_ID = '" . $_SESSION["user_ID"] . "' AND p.proposal_status = 'approve' ";
+                    WHERE p.supervisor_ID = '" . $_GET["id"] . "' AND p.proposal_status = 'approve' ";
 
                     $result = $conn->query($sql);
                     $rowcount = mysqli_num_rows($result);
@@ -102,7 +97,7 @@
 
             <!-- Student Render -->
             <?php
-                if($_SESSION["user_role"] == "student"){
+                if($_GET["role"] == "student"){
                     $sql = "SELECT 
                                 p.project_title, 
                                 p.supervisor_ID,
@@ -117,7 +112,7 @@
                             FROM proposal p
                             JOIN supervisor s ON p.supervisor_ID = s.supervisor_ID 
                             JOIN user u ON u.user_ID = s.user_ID
-                            WHERE p.student_ID = '" . $_SESSION["user_ID"] . "'";
+                            WHERE p.student_ID = '" . $_GET["id"] . "'";
 
                     $result = $conn->query($sql);
                     $rowcount = mysqli_num_rows($result);
@@ -152,21 +147,12 @@
                     echo '</section>';
                 }
             ?>
-
-            <!-- <section id="reference-details">
-                <h2>Reference</h2>
-                <ul>
-                    <li><a href="">My Meeting Logs</a></li>
-                    <li><a href="#">My Goal and Progress</a></li>
-                </ul>
-            </section> -->
         </div>
     </div>
 
     <?php
         include "template/footer.php";
     ?> 
-
 </body>
 
 </html>
