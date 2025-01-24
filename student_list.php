@@ -3,20 +3,42 @@
     require ('function/db_connect.php');
 
     $conn = openCon();
+
     $sql = "SELECT 
                 stu.student_ID ,
                 u.user_name AS student_name,
                 u.user_email AS student_email,
                 u.user_phone AS student_phone,
                 stu.specialization,
-                IFNULL(us.user_name, 'N/A') AS supervisor_name
+            IFNULL(us.user_name, 'N/A') AS supervisor_name
             FROM user u
             JOIN student stu ON u.user_ID = stu.user_ID
             LEFT JOIN proposal p ON stu.student_ID = p.student_ID
             LEFT JOIN supervisor s ON p.supervisor_ID = s.supervisor_ID
             LEFT JOIN user us ON s.user_ID = us.user_ID";
-            
-    $result = $conn->query($sql)
+
+    if(isset($_POST['submit'])) {
+        $student_name = $_POST['student_name'];
+        $supervisor_name = $_POST['supervisor_name'];
+        $specialization = $_POST['specialization'];
+        $conditions = [];
+        
+        if (!empty($student_name)) {
+            $conditions[] = "u.user_name LIKE '%$student_name%'";
+        }
+        if (!empty($supervisor_name)) {
+            $conditions[] = "us.user_name LIKE '%$supervisor_name%'";
+        }
+        if ($specialization !== "All Specializations") {
+            $conditions[] = "stu.specialization = '$specialization'";
+        }
+
+        // Add the WHERE clause if there are conditions
+        if (count($conditions) > 0) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
+        }
+    }
+    $result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -37,21 +59,24 @@
 
     <main>
         <div class="content-container">
-            <div class="filter-container">
+            <form action="student_list.php" method="POST" class="filter-container" >
                 <h2>Filters: </h2>
-                <label for="searchName">Name:</label>
-                <input type="search" id="searchName" name="search" placeholder="Search Name...">
+                <label for="student_name">Student Name:</label>
+                <input type="text" id="student_name" name="student_name" placeholder="Name...">
+                <label for="supervisor_name">Supervisor Name:</label>
+                <input type="text" id="supervisor_name" name="supervisor_name" placeholder="Name...">
                 <label for="speacilization">Specialization:</label>
-                <select id="speacilization" name="speacilization">
-                    <option value="all-specializations">All Specializations</option>
-                    <option value="computerScience">Computer Science</option>
-                    <option value="cyberSecurity">Cybersecurity</option>
-                    <option value="gameDevelopment">Game Development</option>
-                    <option value="dataScience">Data Science</option>
-                    <option value="softwareEnginering">Software Enginering</option>
-                    <option value="informationSystem">Information System</option>
+                <select id="speacilization" name="specialization">
+                    <option name="All Specializations">All Specializations</option>
+                    <option name="Computer Science">Computer Science</option>
+                    <option name="Cybersecurity">Cybersecurity</option>
+                    <option name="Game Development">Game Development</option>
+                    <option name="Data Science">Data Science</option>
+                    <option name="Software Enginering">Software Enginering</option>
+                    <option name="Information System">Information System</option>
                 </select>
-            </div>
+                <input type="submit" name="submit" value="Search">
+            </form>
 
             <div id="studList-table-container" class="table-container">
                 <h1>Student List</h1>
@@ -88,7 +113,7 @@
                                 }
                             }
                             else {
-                                echo "<td colspan=7>No Students Available</td>";
+                                echo "<td colspan=7 style='text-align: center;'>No Students Available</td>";
                             }
                         ?>
                     </tbody>
