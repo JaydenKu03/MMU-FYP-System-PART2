@@ -1,3 +1,13 @@
+<?php
+    require ('function/session.php');
+    require ('function/db_connect.php');
+
+    $conn = OpenCon();
+    $ID = $_SESSION["user_ID"];
+    $name = $_SESSION["user_name"];
+    $role = $_SESSION["user_role"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,84 +28,129 @@
     <div id="content-container">
         <div id="my-profile">
             <img src="images/user_profile.png">
-            <h1 class="title-font" id="user-name">Name</h1>
+            <h1 class="title-font" id="user-name"> <?php echo $name; ?> </h1>
         </div>
 
         <div id="information-container">
-            <!-- Admin Render -->
-            <!-- <section id="user-details">
-                <h2>User Details</h2>
-                <h3>ID</h3>
-                <p>123456</p>
-                <h3>Role</h3>
-                <p>Admin</p>
-                <h3>Email</h3>
-                <p>123456@admin.mmu.edu.my</p>
-            </section>
+            <!-- Genreal Render -->
+            <?php
+                if($role == "admin") {
+                    $sql = "SELECT a.admin_ID, u.user_name, u.user_email, u.user_phone FROM user u
+                            JOIN admin a ON u.user_ID = a.user_ID
+                            WHERE a.admin_ID = '$ID'";
+                }
+                else if($role == "supervisor") {
+                    $sql = "SELECT s.supervisor_ID, u.user_name, u.user_email, u.user_phone FROM user u
+                            JOIN supervisor s ON u.user_ID = s.user_ID
+                            WHERE s.supervisor_ID = '$ID'";
+                }
+                else {
+                    $sql = "SELECT s.student_ID, s.specialization, u.user_name, u.user_email, u.user_phone FROM user u
+                            JOIN student s ON u.user_ID = s.user_ID
+                            WHERE s.student_ID = '$ID'";
+                }
 
-            <section id="student-proposal-approved">
-                <h2>Student's Proposal Approved</h2>
-                <ul>
-                    <li>121311715 - Jayden</li>
-                    <li>121589244 - Bob</li>
-                    <li>120145841 - Max</li>
-                    <li>1211311480 - Jhon</li>
-                </ul>
-            </section> -->
+                $result = $conn->query($sql);
+                $rowcount = mysqli_num_rows($result);
+                $row = mysqli_fetch_array($result);
 
-            <!-- Supervisor Render -->
-            <!-- <section id="user-details">
-                <h2>User Details</h2>
-                <h3>ID</h3>
-                <p>123456</p>
-                <h3>Role</h3>
-                <p>Supervisor</p>
-                <h3>Email</h3>
-                <p>123456@supervisor.mmu.edu.my</p>
-            </section>
+                if($rowcount == 1){
+                    $email = $row['user_email'];
+                    $phone = $row['user_phone'];
 
-            <section id="in-charge-details">
-                <h2>Supervised Student</h2>
-                <ul>
-                    <li>121311715 - Jayden</li>
-                    <li>121589244 - Bob</li>
-                    <li>120145841 - Max</li>
-                    <li>1211311480 - Jhon</li>
-                </ul>
-            </section> -->
+                    if($role == "student") {
+                        $specialization = $row['specialization'];
+                    }
 
-            <!-- Student Render -->
+                }else{
+                    echo "<script>alert('Information retrieve error');</script>";
+                }
+
+            ?>
             <section id="user-details">
                 <h2>User Details</h2>
                 <h3>ID</h3>
-                <p>123456</p>
+                <p> <?php echo $ID; ?> </p>
                 <h3>Role</h3>
-                <p>Student</p>
-                <h3>Specialization</h3>
-                <p>Software Engineering</p>
+                <p> <?php echo ucfirst($role); ?> </p>
+                <?php
+                    if($role == "student"){
+                        echo "<h3>Specialization</h3>
+                              <p>$specialization</p>";
+                    }
+                ?>
                 <h3>Email</h3>
-                <p>123456@student.mmu.edu.my</p>
+                <p> <?php echo $email; ?> </p>
+                <h3>Phone</h3>
+                <p> <?php echo $phone; ?> </p>
             </section>
 
-            <section id="fyp-details">
-                <h2>FYP Details</h2>
-                <h3>Title Name</h3>
-                <p>E-commerce with Aritificial Intelligence</p>
-                <h3>Title Status</h3>
-                <p>Approved</p>
-                <h3>Supervisor In Charge</h3>
-                <p>Mr. ABC</p>
-                <h3>My Proposal</h3>
-                <p>Proposol.pdf</p>
-            </section>
+            <!-- Supervisor Render -->
+            <?php
+                if($role == "supervisor"){
+                    $sql = "SELECT s.student_ID, u.user_name FROM user u
+                    JOIN student s ON u.user_ID = s.user_ID
+                    JOIN proposal p ON s.student_ID = p.student_ID
+                    WHERE p.supervisor_ID = '$ID' AND p.proposal_status = 'approve' ";
 
-            <section id="reference-details">
+                    $result = $conn->query($sql);
+                    $rowcount = mysqli_num_rows($result);
+                    echo '<section id="in-charge-details">';
+                    echo '<h2>Supervised Student</h2>';
+                    echo '<ul>';
+                    if($rowcount >= 1) {
+                        while($row = $result->fetch_assoc()){
+                            $student_ID = $row['student_ID'];
+                            $student_name = $row['user_name'];
+                            echo "<li>$student_ID - $student_name</li>";
+                        }
+                    }else {
+                        echo "<li>No student is under your supervision currently</li>";
+                    }
+                    echo '</ul>';
+                    echo '</section>';
+                }
+            ?>
+
+            <!-- Student Render -->
+            <?php
+                if($role == "student"){
+                    $sql = "SELECT p.project_title, p.proposal_status, u.user_name AS supervisor_name FROM proposal p
+                            JOIN supervisor s ON p.supervisor_ID = s.supervisor_ID 
+                            JOIN user u ON u.user_ID = s.user_ID
+                            WHERE p.student_ID = '$ID'";
+
+                    $result = $conn->query($sql);
+                    $rowcount = mysqli_num_rows($result);
+                    $row = mysqli_fetch_array($result);
+
+                    echo '<section id="fyp-details">';
+                    echo '<h2>FYP Details</h2>';
+                    if($rowcount == 1) {
+                        $title = $row['project_title'];
+                        $status = $row['proposal_status'];
+                        $supervisor_name = $row['supervisor_name'];
+
+                        echo "<h3>Title Name</h3>
+                            <p>$title</p>  
+                            <h3>Title Status</h3>
+                            <p>$status</p>
+                            <h3>Supervisor In Charge</h3>
+                            <p>Mr/Ms. $supervisor_name</p>";
+                    }else {
+                        echo "You haven't submit any proposal yet";
+                    }
+                    echo '</section>';
+                }
+            ?>
+
+            <!-- <section id="reference-details">
                 <h2>Reference</h2>
                 <ul>
-                    <li><a href="#">My Meeting Logs</a></li>
+                    <li><a href="">My Meeting Logs</a></li>
                     <li><a href="#">My Goal and Progress</a></li>
                 </ul>
-            </section>
+            </section> -->
         </div>
     </div>
 
