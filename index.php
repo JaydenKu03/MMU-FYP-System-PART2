@@ -87,12 +87,15 @@
 
                     <?php
                         if($role == "Admin"){
+                            define('MAIN_ADMIN', true);
                             include("template/main_admin.php");
                         }
                         elseif($role == "Supervisor"){
+                            define('MAIN_SUPERVISOR', true);
                             include("template/main_supervisor.php");
                         }
                         else{
+                            define('MAIN_STUDENT', true);
                             include("template/main_student.php");
                         }
                     ?>

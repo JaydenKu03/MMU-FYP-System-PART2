@@ -1,3 +1,9 @@
+<?php
+    if (!defined('MAIN_SUPERVISOR') || MAIN_SUPERVISOR !== true) {
+        die('Forbidden: Direct access is not allowed.');
+    }
+?>
+
 <div class="operation-task">
     <a href="approved_list.php">
         <img src="images/approved.png" alt="approved_list">

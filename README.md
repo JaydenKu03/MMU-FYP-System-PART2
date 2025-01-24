@@ -14,4 +14,10 @@ the "clone repository".
 ### Note
 - Create a database call "fyp_web" and import the sample_data.sql
 
-- All navbar and footer are already added, the files are inside the template folder.
+- The db_connect.php and session.php is inside the function folder. Use that to connect db and access session variable
+
+- Any pages that require login to access can place "require ('function/session.php');" You can also access
+  the login user's name, ID, and role by using the $_SESSION[]
+
+- Any new added function should be place inside the function folder.
+

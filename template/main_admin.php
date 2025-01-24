@@ -1,3 +1,9 @@
+<?php
+    if (!defined('MAIN_ADMIN') || MAIN_ADMIN !== true) {
+        die('Forbidden: Direct access is not allowed.');
+    }
+?>
+
 <div class="operation-task">
     <a href="approved_list.php">
         <img src="images/approved.png" alt="approved_list">
@@ -26,3 +32,4 @@
         <p>Announcement & Event</p>
     </a>
 </div>
+

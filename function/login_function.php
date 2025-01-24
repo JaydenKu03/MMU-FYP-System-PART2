@@ -27,7 +27,7 @@
                 break;
             
             default:
-                echo "<script>alert('Invalid ID');window.location.href='login.php';</script>";
+                echo "<script>alert('Invalid ID');window.location.href='../login.php';</script>";
                 exit();
         }
 
@@ -42,11 +42,11 @@
 
             header('Location:../index.php');
         }else {
-            echo "<script>alert('Invalid password');window.location.href='login.php';</script>";
+            echo "<script>alert('Invalid password');window.location.href='../login.php';</script>";
         }
     }
     else {
-        echo "<script>alert('Page Not Accessible');window.location.href='login.php';</script>";
+        echo "<script>alert('Page Not Accessible');window.location.href='../login.php';</script>";
     }
 
 ?>
