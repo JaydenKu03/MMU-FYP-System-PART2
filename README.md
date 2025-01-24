@@ -20,5 +20,5 @@ the "clone repository".
 - Any pages that require login to access can place "require ('function/session.php');" You can also access
   the login user's name, ID, and role by using the $_SESSION[]
 
-- Any new added function should be place inside the function folder.
+- Any new added php file can place inside the function folder.
 
