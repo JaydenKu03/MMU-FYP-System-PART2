@@ -128,8 +128,8 @@ CREATE TABLE `meeting_log`(
 CREATE TABLE `announcement`(
     `announcement_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `post_by` VARCHAR(40) NOT NULL,
-    `announcement_title` VARCHAR(40) NOT NULL,
-    `announcement_content` VARCHAR(100) NOT NULL,
+    `announcement_title` VARCHAR(50) NOT NULL,
+    `announcement_content` VARCHAR(350) NOT NULL,
     `admin_ID` INT(10) UNSIGNED NOT NULL,
     PRIMARY KEY (`announcement_ID`),
     FOREIGN KEY (`admin_ID`) REFERENCES `admin`(`admin_ID`) ON DELETE CASCADE
@@ -144,7 +144,7 @@ CREATE TABLE `event`(
     `event_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `post_by` VARCHAR(40) NOT NULL,
     `event_date` DATE NOT NULL,
-    `event_title` VARCHAR(40) NOT NULL,
+    `event_title` VARCHAR(50) NOT NULL,
     `admin_ID` INT(10) UNSIGNED NOT NULL,
     PRIMARY KEY (`event_ID`),
     FOREIGN KEY (`admin_ID`) REFERENCES `admin`(`admin_ID`) ON DELETE CASCADE
@@ -329,7 +329,7 @@ INSERT INTO `meeting_log` (
 INSERT INTO `announcement` (
     `post_by`, `announcement_title`, `announcement_content`, `admin_ID`
 ) VALUES
-    ('Camellya', 'FYP MEETING LOG', 'Student Must Submit Meeting Log by 3rd December', 80004);
+    ('Camellya', 'FYP PROPOSAL SUBMISSION', 'Student Must Submit Their Proposal By 3rd December. Any late submission will not be accepted', 80004);
 
 -- event data
 INSERT INTO `event` (
