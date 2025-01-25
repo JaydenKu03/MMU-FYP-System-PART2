@@ -123,9 +123,9 @@
                     if($rowcount == 1) {
                         echo '<h3>Title Name</h3>
                               <p>'.$row['project_title'].'</p><br>
-                              <h3>Supervisor In Charge</h3>
+                              <h3>Main Supervisor</h3>
                               <p>Dr. '.$row['supervisor_name'].'</p><br>
-                              <h3>Supervisor In Charge</h3>
+                              <h3>Supervisor ID</h3>
                               <p>'.$row['supervisor_ID'].'</p><br>
                               <h3>Co-Supervisor</h3>
                               <p>Dr. '.$row['co_supervisor_name'].'</p><br>

@@ -1,11 +1,6 @@
 <?php
     require ('function/session.php');
     require ('function/db_connect.php');
-
-    $name = $_SESSION["user_name"];
-    $ID = $_SESSION["user_ID"];
-    $role = ucfirst($_SESSION["user_role"]);
-
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +28,10 @@
                 <div id="user-info">
                     <div id="picture-content">
                         <img id="user_picture" src="images/user_profile2.png" alt="user_img">
-                        <h3 id="user-name"><?php echo $name; ?></h3>
+                        <h3 id="user-name"><?php echo $_SESSION["user_name"]; ?></h3>
                     </div>
-                    <p id="user-id"><?php echo $ID; ?></p>      
-                    <p id="user-role"><?php echo $role; ?></p>             
+                    <p id="user-id"><?php echo $_SESSION["user_ID"]; ?></p>      
+                    <p id="user-role"><?php echo ucfirst($_SESSION["user_role"]); ?></p>             
                 </div>
                 
                 <div id="user-navigation">
@@ -86,11 +81,11 @@
                 <div id="operation-content">
 
                     <?php
-                        if($role == "Admin"){
+                        if($_SESSION["user_role"] == "admin"){
                             define('MAIN_ADMIN', true);
                             include("template/main_admin.php");
                         }
-                        elseif($role == "Supervisor"){
+                        elseif($_SESSION["user_role"] == "supervisor"){
                             define('MAIN_SUPERVISOR', true);
                             include("template/main_supervisor.php");
                         }
@@ -104,21 +99,25 @@
                 <h2>Annoucement Board</h2>
                 <div id="announcement-board">
                     <div id="announcement-content">
-                        <div class="annoucement-text">
-                            <span class="title">Title</span>
-                            <span class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet vero suscipit odio magnam, voluptatum ipsam sint quas, laborum aliquam blanditiis repellat veniam est iure cumque necessitatibus repellendus ad consequatur sed? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad nobis quisquam, rerum repudiandae cum aperiam odio quibusdam nisi quam, fuga totam amet! Quam tenetur provident neque nostrum recusandae! Dolorum, consequatur.</span>
-                            <span class="author">By Jay</span>
-                        </div>
-                        <div class="annoucement-text">
-                            <span class="title">Title</span>
-                            <span class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet vero suscipit odio magnam, voluptatum ipsam sint quas, laborum aliquam blanditiis repellat veniam est iure cumque necessitatibus repellendus ad consequatur sed? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad nobis quisquam, rerum repudiandae cum aperiam odio quibusdam nisi quam, fuga totam amet! Quam tenetur provident neque nostrum recusandae! Dolorum, consequatur.</span>
-                            <span class="author">By Jay</span>
-                        </div>
-                        <div class="annoucement-text">
-                            <span class="title">Title</span>
-                            <span class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet vero suscipit odio magnam, voluptatum ipsam sint quas, laborum aliquam blanditiis repellat veniam est iure cumque necessitatibus repellendus ad consequatur sed? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad nobis quisquam, rerum repudiandae cum aperiam odio quibusdam nisi quam, fuga totam amet! Quam tenetur provident neque nostrum recusandae! Dolorum, consequatur.</span>
-                            <span class="author">By Jay</span>
-                        </div>
+
+                        <?php
+                            $conn = openCon();
+                            $sql = "SELECT * FROM announcement";
+                            $result = $conn-> query($sql);
+                            $rowcount = mysqli_num_rows($result);
+
+                            if($rowcount > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    echo '<div class="annoucement-text">
+                                          <span class="title">'.strtoupper($row['announcement_title']) .'</span>
+                                          <span class="text">'.$row['announcement_content'].'</span>
+                                          <span class="author">By: '.$row['post_by'].'</span>
+                                          </div>';
+                                }
+                            }else {
+                                echo '<div class="annoucement-text">No announcement yet</div>';
+                            }
+                        ?>
                     </div>
                 </div>
 
@@ -148,14 +147,26 @@
                 <div id="event-container">
                     <h2>Event</h2>
                     <div>
-                        <div class="event-details">
-                            <h3>1 November 2024</h3>
-                            <p>Proposal wirtting workshop</p>
-                        </div>
-                        <div class="event-details">
-                            <h3>10 December 2024</h3>
-                            <p>Guide on Literature Review</p>
-                        </div>
+                        <?php
+                            $conn = openCon();
+
+                            $sql = "SELECT * FROM event ORDER BY event_date ASC";
+                            $result = $conn-> query($sql);
+                            $rowcount = mysqli_num_rows($result);
+
+                            if($rowcount > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    $formatted_date = date('d F Y', strtotime($row['event_date']));
+                                    echo '<div class="event-details">
+                                          <h3>'.$formatted_date.'</h3>
+                                          <p>'. strtoupper($row['event_title']).'</p>
+                                          </div>';
+                                }
+                            }
+                            else {
+                                echo "No event currently";
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
