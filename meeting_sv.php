@@ -10,15 +10,14 @@
     </head>
 
     <body>
-        <?php
-            include "template/navbar.php";
-        ?>
+        <?php include "template/navbar.php"; ?>
 
         <h1><b>Meeting Management</b></h1>
         <br />
-            <div class="meeting-container">
-                <div class="request-cointainer">
-                    <h2>Appointment Request</h2>
+        <div class="meeting-container">
+            <div class="request-container">
+                <h2>Appointment Request</h2>
+                <form action="" method="POST" class="active-form">
                     <table id="meeting-status">
                         <thead>
                             <tr>
@@ -33,66 +32,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>1211306413</td>
-                                <td>Mohamed Arique bin Mohamed Aziyen</td>
-                                <td>First Meeting</td>
-                                <td>Discuss Chapter 1</td>
-                                <td>19/12/2024</td>
-                                <td>3.00 PM</td>
-                                <td>
-                                    <select name="status" id="status">
-                                        <option value="Pending">Pending</option>
-                                        <option value="Accept">Accept</option>
-                                        <option value="Cancel">Cancel</option>
-                                    </select>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>1211306411</td>
-                                <td>Mohamed Arique </td>
-                                <td>Second Meeting</td>
-                                <td>Refine Chapter 1</td>
-                                <td>20/12/2024</td>
-                                <td>3.00 PM</td>
-                                <td>
-                                    <select name="status" id="status">
-                                        <option value="Pending">Pending</option>
-                                        <option value="Accept">Accept</option>
-                                        <option value="Cancel">Cancel</option>
-                                    </select>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td>1211306412</td>
-                                <td>Arique</td>
-                                <td>Second Meeting</td>
-                                <td>Refine Chapter 1</td>
-                                <td>20/12/2024</td>
-                                <td>4.00 PM</td>
-                                <td>
-                                    <select name="status" id="status">
-                                        <option value="Pending">Pending</option>
-                                        <option value="Accept">Accept</option>
-                                        <option value="Cancel">Cancel</option>
-                                    </select>
-                                </td>
-                            </tr>
+                            <?php
+                                require 'function/manageRequest.php';
+                                manageMeetingRequest();
+                            ?>
                         </tbody>
                     </table>
                     <button type="submit">Submit</button>
-                </div>
-
+                </form>
             </div>
+        </div>
 
-            
-            <?php
-                include "template/footer.php";
-            ?>  
+        <?php include "template/footer.php"; ?>  
     </body>
 </html>

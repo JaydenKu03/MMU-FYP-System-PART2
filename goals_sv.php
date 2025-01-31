@@ -1,67 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Goals and Progress</title>
-        <link rel="stylesheet" href="static/goals.css">
-        <link rel="stylesheet" href="static/base.css">
-        <link rel="stylesheet" href="static/table.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals and Progress</title>
+    <link rel="stylesheet" href="static/goals.css">
+    <link rel="stylesheet" href="static/base.css">
+    <link rel="stylesheet" href="static/table.css">
+</head>
 
-    <body>
-        <?php
-            include "template/navbar.php";
-        ?>
+<body>
+    <?php
+        include "template/navbar.php";
+        require 'function/selectStudent.php';
+    ?>
 
-        <h1>Goals and Progress</h1>
-        <h2 id="student-name">Supervised Student Name: ------</h2>
-        <div class="goals-container">
-            <div class="progress-container">
-                <h2>Progress Table</h2>
-                <br />
-                <table id="tracker">
-                    <br />
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Progress</th>
-                            <th>Next Goal</th>
-                            <th>Comment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>12/12/2024</td>
-                            <td>Done Intoduction. Continuing with Literature Review</td>
-                            <td>Literature Review</td>
-                            <td>Give general overview for introduction</td>
-                        </tr>
-                        <tr>
-                            <td>18/12/2024</td>
-                            <td>Literature Review</td>
-                            <td>5 more Literature Review</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>    
-            </div>
+    <h1>Goals and Progress</h1>
 
-            <div class="update-container">
-                    <h2>Comment Form</h2>
-                    <form id="comment-form" class="active-form">
+    <div class="goals-container">
 
-                        <label for="update-comment">Comment:</label>
-                        <textarea id="update-comment" name="update-comment" maxlength="350" rows="4" placeholder="Enter Comment"></textarea>
-                        
-                        <button type="submit">Submit Update</button>
-                    </form>
-            </div>
+        <div class="select-container">
+            <h2>Supervised Student Name</h2>
+            <form action="function/selectStudent.php" method="POST" class="active-form">
+                <label for="student_ID">Select Student:</label>
+                <select name="student_ID" id="student_ID" required onchange="this.form.submit()">
+                    <option value="" disabled selected>-- Choose Student --</option>
+                    <?php 
+                        fetchStudent(); 
+                    ?>
+                </select>
+            </form>
         </div>
 
-        <?php
-            include "template/footer.php";
-        ?>   
+        <div class="progress-container">
+            <h2>Progress Table</h2>
+            <br />
+            <table id="tracker">
+                <br />
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Progress</th>
+                        <th>Next Goal</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        require 'function/viewGoals_sv.php';
+                        viewProgress();
+                    ?>
+                </tbody>
+            </table>    
+        </div>
 
-    </body>
+        <div class="update-container">
+            <h2>Comment Form</h2>
+            <form action="function/updateGoals_sv.php" method="POST" class="active-form">
+                <label for="update-date">Select Student Progress Date:</label>
+                <input type="date" id="update-date" name="update-date" required>
+
+                <label for="update-comment">Comment:</label>
+                <textarea id="update-comment" name="update-comment" maxlength="350" rows="4" placeholder="Enter Comment" required></textarea>
+                
+                <button type="submit">Submit Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <?php include "template/footer.php"; ?>   
+</body>
 </html>

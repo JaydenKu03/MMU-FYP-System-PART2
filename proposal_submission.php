@@ -17,7 +17,7 @@
 
     <div class="container">
         <h1 class="title-font">Proposal Submission</h1>
-        <form action="/register.php" method="get">
+        <form action="function/proposalSub.php" method="POST" enctype="multipart/form-data">
             <label for="name">Student Name</label>
             <input type="text" id="name" name="name" placeholder="John Smith" required />
 

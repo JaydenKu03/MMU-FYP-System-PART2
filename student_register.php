@@ -13,11 +13,11 @@
 <body>
     <div class="container">
         <h1 class="title-font">FYP Student Account Registration</h1>
-        <form action="/register.php" method="get">
+        <form action="function/registerstud.php" method="POST">
             <label for="name">Student Name</label>
             <input type="text" id="name" name="name" placeholder="John Smith" required />
 
-            <label for="email">Password</label>
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
 
             <label for="email">Email</label>
@@ -27,13 +27,13 @@
             <input type="tel" id="phone" name="phone" placeholder="012-3456789" required />
 
             <label for="specialization">Specialization</label>
-            <select name="speacilization" id="specialization" required>
-                <option value="computerScience">Computer Science</option>
-                <option value="cyberSecurity">Cybersecurity</option>
-                <option value="gameDevelopment">Game Development</option>
-                <option value="dataScience">Data Science</option>
-                <option value="softwareEnginering">Software Enginering</option>
-                <option value="informationSystem">Information System</option>
+            <select name="specialization" id="specialization" required> 
+                <option name="Computer Science">Computer Science</option>
+                <option name="Cybersecurity">Cybersecurity</option>
+                <option name="Game Development">Game Development</option>
+                <option name="Data Science">Data Science</option>
+                <option name="Software Enginering">Software Enginering</option>
+                <option name="Information System">Information System</option>
             </select>
 
             <div class="button-container">

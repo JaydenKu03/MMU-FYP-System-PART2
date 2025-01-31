@@ -20,22 +20,21 @@
         <div class="booking-cointainer">
             <h2>Appointment Booking</h2>
             <br />
-            <form id="meeting-details" class="active-form">
+            <form action="function/bookMeeting.php" method="POST" class="active-form">
                 <h3><b>Appointment Details</b></h3>
                 <br />
 
                 <label for="meeting-title">Title:</label>
-                <input type="text" id="meeting-title" name="meeting-title" placeholder="Enter Title">
+                <input type="text" id="meeting-title" name="meeting-title" placeholder="Enter Title" required>
 
                 <label for="meeting-description">Description:</label>
-                <textarea id="meeting-description" name="meeting-description" maxlength="350" rows="4"
-                    placeholder="Enter Description"></textarea>
+                <textarea id="meeting-description" name="meeting-description" maxlength="350" rows="4" placeholder="Enter Description" required></textarea>
 
                 <label for="meeting-date">Date:</label>
-                <input type="date" id="meeting-date" name="meeting-date">
+                <input type="date" id="meeting-date" name="meeting-date" required>
 
                 <label for="meeting-time">Time:</label>
-                <input type="time" id="meeting-time" name="meeting-time">
+                <input type="time" id="meeting-time" name="meeting-time" required>
 
                 <button type="submit">Submit Booking</button>
             </form>
@@ -56,32 +55,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>First Meeting</td>
-                        <td>Discuss Chapter 1</td>
-                        <td>19/12/2024</td>
-                        <td>3.00 PM</td>
-                        <td>Done</td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td>Second Meeting</td>
-                        <td>Refine Chapter 1</td>
-                        <td>20/12/2024</td>
-                        <td>3.00 PM</td>
-                        <td>No</td>
-                    </tr>
-
-                    <tr>
-                        <td>3</td>
-                        <td>Second Meeting</td>
-                        <td>Refine Chapter 1</td>
-                        <td>20/12/2024</td>
-                        <td>4.00 PM</td>
-                        <td>Pending</td>
-                    </tr>
+                    <?php
+                         require 'function/viewStatus.php';
+                         viewStatus();
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -90,12 +67,12 @@
             <h2><b>Meeting Logs</b></h2>
             <br />
             <ol>
-                <li><a href="#">weeklylog1.pdf</a></li>
-                <li><a href="#">weeklylog2.pdf</a></li>
-                <li><a href="#">weeklylog3.pdf</a></li>
-                <li><a href="#">weeklylog4.pdf</a></li>
+                <?php
+                    require 'function/viewLogs.php';
+                    viewLogs();
+                ?>
             </ol>
-            <form id="logs" method="post" enctype="multipart/form-data" class="active-form">
+            <form action="function/uploadLogs.php" method="post" enctype="multipart/form-data" class="active-form">
                 <input type="file" name="file">
                 <button type="submit">Submit Logs</button>
             </form>

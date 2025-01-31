@@ -83,7 +83,7 @@ CREATE TABLE `proposal` (
     `project_category` VARCHAR(100) NOT NULL,
     `industry_collaboration` VARCHAR(3) NOT NULL CHECK (`industry_collaboration` IN ('yes', 'no')),
     `file_address` VARCHAR(100) NOT NULL,
-    `proposal_status` VARCHAR(10) NOT NULL CHECK (`proposal_status` IN ('approve', 'pending')),
+    `proposal_status` VARCHAR(10) NOT NULL CHECK (`proposal_status` IN ('approve', 'pending', 'reject')),
     PRIMARY KEY (`proposal_ID`),
     FOREIGN KEY (`student_ID`) REFERENCES `student`(`student_ID`) ON DELETE CASCADE,
     FOREIGN KEY (`supervisor_ID`) REFERENCES `supervisor`(`supervisor_ID`) ON DELETE CASCADE
@@ -102,6 +102,7 @@ CREATE TABLE `meeting_record` (
     `meeting_desc` VARCHAR(100) NOT NULL,
     `student_ID` INT(10) UNSIGNED NOT NULL,
     `supervisor_ID` INT(10) UNSIGNED NOT NULL,
+    `meeting_status` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`meeting_ID`),
     FOREIGN KEY (`student_ID`) REFERENCES `student`(`student_ID`) ON DELETE CASCADE,
     FOREIGN KEY (`supervisor_ID`) REFERENCES `supervisor`(`supervisor_ID`) ON DELETE CASCADE
@@ -157,7 +158,7 @@ CREATE TABLE `event`(
 
 CREATE TABLE `goal_and_progress`(
     `goal_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `task_assigned` VARCHAR(50) NOT NULL,
+    `progress_date` DATE NOT NULL,
     `current_progress` VARCHAR(50) NOT NULL,
     `next_goal` VARCHAR(50) NOT NULL,
     `comment` VARCHAR(50) NOT NULL,
@@ -305,13 +306,13 @@ INSERT INTO `proposal` (
 
 -- meeting_record data
 INSERT INTO `meeting_record` (
-    `meeting_title`, `meeting_date`, `meeting_time`, `meeting_desc`, `student_ID`, `supervisor_ID`
+    `meeting_title`, `meeting_date`, `meeting_time`, `meeting_desc`, `student_ID`, `supervisor_ID`, `meeting_status`
 ) VALUES
-    ('Project Kickoff', '2025-01-15', '10:00:00', 'Discussed project scope and deliverables', 10001, 50001),
-    ('Cryptography Research Update', '2025-01-16', '14:00:00', 'Reviewed initial research findings', 10002, 50002),
-    ('Data Analysis Plan', '2025-01-17', '11:00:00', 'Discussed methodology for data analysis', 10004, 50004),
-    ('Smart Cities IT Infrastructure', '2025-01-18', '09:00:00', 'Reviewed IT requirements and system design', 10006, 50005),
-    ('Banking TPS Review', '2025-01-19', '15:00:00', 'Discussed system integration and security', 10009, 50001);
+    ('Project Kickoff', '2025-01-15', '10:00:00', 'Discussed project scope and deliverables', 10001, 50001, 'Accept'),
+    ('Cryptography Research Update', '2025-01-16', '14:00:00', 'Reviewed initial research findings', 10002, 50002, 'Cancel'),
+    ('Data Analysis Plan', '2025-01-17', '11:00:00', 'Discussed methodology for data analysis', 10004, 50004, 'Pending'),
+    ('Smart Cities IT Infrastructure', '2025-01-18', '09:00:00', 'Reviewed IT requirements and system design', 10006, 50005, 'Pending'),
+    ('Banking TPS Review', '2025-01-19', '15:00:00', 'Discussed system integration and security', 10009, 50001, 'Pending');
 
 
 -- meeting_log data
@@ -340,10 +341,10 @@ INSERT INTO `event` (
 
 -- goal_and_progress data
 INSERT INTO `goal_and_progress` (
-    `task_assigned`, `current_progress`, `next_goal`, `comment`, `student_ID`
+    `progress_date`, `current_progress`, `next_goal`, `comment`, `student_ID`
 ) VALUES
-    ('Complete project proposal draft', 'Draft approved by supervisor', 'Start project implementation', 'Well-prepared proposal', 10001),
-    ('Research cryptography methods', 'Initial research completed', 'Develop encryption prototype', 'Good progress on research', 10002),
-    ('Analyze healthcare data sets', 'Data collection completed', 'Perform data analysis', 'Impressive dataset preparation', 10004),
-    ('Research smart city IT needs', 'Infrastructure plan drafted', 'Implement network simulation', 'Thorough analysis provided', 10006),
-    ('Design banking transaction system', 'System design completed', 'Begin coding transactions', 'Comprehensive design', 10009);
+    ('2024-12-12', 'Draft approved by supervisor', 'Start project implementation', 'Well-prepared proposal', 10001),
+    ('2024-11-12', 'Initial research completed', 'Develop encryption prototype', 'Good progress on research', 10002),
+    ('2024-12-11', 'Data collection completed', 'Perform data analysis', 'Impressive dataset preparation', 10004),
+    ('2024-12-13', 'Infrastructure plan drafted', 'Implement network simulation', 'Thorough analysis provided', 10006),
+    ('2024-11-13', 'System design completed', 'Begin coding transactions', 'Comprehensive design', 10009);

@@ -31,34 +31,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>12/12/2024</td>
-                            <td>Done Intoduction. Continuing with Literature Review</td>
-                            <td>Literature Review</td>
-                            <td>Give general overview for introduction</td>
-                        </tr>
-                        <tr>
-                            <td>18/12/2024</td>
-                            <td>Literature Review</td>
-                            <td>5 more Literature Review</td>
-                            <td></td>
-                        </tr>
+                        <?php
+                            require 'function/viewGoals.php';
+                            viewProgress();
+                        ?>
                     </tbody>
                 </table>    
             </div>
 
             <div class="update-container">
                     <h2>Update Form</h2>
-                    <form id="update-form" class="active-form">
+                    <form action="function/updateGoals.php" method="POST" class="active-form">
 
                         <label for="update-date">Date:</label>
-                        <input type="date" id="update-date" name="update-date">
+                        <input type="date" id="update-date" name="update-date" required>
 
                         <label for="update-progress">Progress:</label>
-                        <textarea id="update-progress" name="update-progress" maxlength="350" rows="4" placeholder="Enter Current Progress"></textarea>
+                        <textarea id="update-progress" name="update-progress" maxlength="350" rows="4" placeholder="Enter Current Progress" required></textarea>
 
                         <label for="update-goal">Next Goal:</label>
-                        <textarea id="update-goal" name="update-goal" maxlength="350" rows="4" placeholder="Enter Next Goal"></textarea>
+                        <textarea id="update-goal" name="update-goal" maxlength="350" rows="4" placeholder="Enter Next Goal" required></textarea>
                         
                         <button type="submit">Submit Update</button>
                     </form>

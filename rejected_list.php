@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Approved FYP Titles</title>
+    <title>Rejected FYP Titles</title>
     <link rel="stylesheet" href="static/base.css">
     <link rel="stylesheet" href="static/table.css">
     <link rel="stylesheet" href="static/reusable.css">
@@ -40,7 +40,7 @@
 
 
         <div class="table-container">
-            <h1>Approved FYP Title List</h1>
+            <h1>Rejected FYP Title List</h1>
             <table id="approved-table" class="modern-table">
                 <thead>
                     <tr>
@@ -54,8 +54,8 @@
                 </thead>
                 <tbody>
                     <?php
-                    require 'function/viewApproved.php';
-                    viewData();
+                    require 'function/viewReject.php';
+                    viewReject();
                     ?>
                 </tbody>
             </table>
