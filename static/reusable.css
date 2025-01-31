@@ -29,6 +29,10 @@
     background-color: #007bb5;
 }
 
+.modern-button:visited {
+    color: white;
+}
+
 .title-font{
     color: hsl(219, 61%, 45%);
     font-family: 'Arial', sans-serif;  

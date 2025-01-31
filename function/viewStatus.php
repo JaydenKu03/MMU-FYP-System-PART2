@@ -1,8 +1,4 @@
 <?php
-require ('function/session.php');
-require ('function/db_connect.php');
-$conn = OpenCon();
-
 function viewStatus() {
     global $conn;
 
@@ -32,7 +28,7 @@ function viewStatus() {
             $count++;
         }
     } else {
-        echo "<tr><td colspan='4'>No records found<td></tr>";
+        echo "<tr><td colspan='6'>No records found</td></tr>";
     }
 }
 ?>

@@ -1,3 +1,7 @@
+<?php
+    require ('function/session.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,10 +23,22 @@
         <h1 class="title-font">Proposal Submission</h1>
         <form action="function/proposalSub.php" method="POST" enctype="multipart/form-data">
             <label for="name">Student Name</label>
-            <input type="text" id="name" name="name" placeholder="John Smith" required />
+            <input type="text" id="name" name="name" 
+            <?php 
+                if ($_SESSION['user_role'] == 'student') {
+                    echo 'value="' . $_SESSION['user_name'] . '" readonly';
+                }
+            ?> 
+            required />
 
             <label for="id">Student ID</label>
-            <input type="text" id="id" name="id" placeholder="0123456789" required />
+            <input type="text" id="id" name="id"
+            <?php 
+                if ($_SESSION['user_role'] == 'student') {
+                    echo 'value="' . $_SESSION['user_ID'] . '" readonly';
+                }
+            ?> 
+            required />
 
             <label for="specialization">Specialization</label>
             <select name="speacilization" id="specialization" required>
@@ -30,7 +46,7 @@
                 <option value="Cybersecurity">Cybersecurity</option>
                 <option value="Game Development">Game Development</option>
                 <option value="Data Science">Data Science</option>
-                <option value="Software Enginering">Software Enginering</option>
+                <option value="Software Engineering">Software Engineering</option>
                 <option value="Information System">Information System</option>
             </select>
 
@@ -38,10 +54,22 @@
             <input type="text" id="title" name="title" required />
 
             <label for="supervisor">Supervisor Name</label>
-            <input type="text" id="supervisor" name="supervisor" required />
+            <input type="text" id="supervisor" name="supervisor" 
+            <?php 
+                if ($_SESSION['user_role'] == 'supervisor') {
+                    echo 'value="' . $_SESSION['user_name'] . '" readonly';
+                }
+            ?> 
+            required />
 
             <label for="supervisor_id">Supervisor ID</label>
-            <input type="text" id="supervisor_id" name="supervisor_id" required />
+            <input type="text" id="supervisor_id" name="supervisor_id"
+            <?php 
+                if ($_SESSION['user_role'] == 'supervisor') {
+                    echo 'value="' . $_SESSION['user_ID'] . '" readonly';
+                }
+            ?> 
+            required />
 
             <label for="cosupervisor">Co-Supervisor Name</label>
             <input type="text" id="cosupervisor" name="cosupervisor" />
@@ -66,7 +94,7 @@
                 <option value="Cybersecurity">Cybersecurity</option>
                 <option value="Game Development">Game Development</option>
                 <option value="Data Science">Data Science</option>
-                <option value="Software Enginering">Software Enginering</option>
+                <option value="Software Engineering">Software Engineering</option>
                 <option value="Information System">Information System</option>
             </select>
 

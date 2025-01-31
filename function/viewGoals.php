@@ -1,13 +1,9 @@
 <?php
-require ('function/session.php');
-require ('function/db_connect.php');
-$conn = OpenCon();
-
 function viewProgress() {
     global $conn;
 
     $student_id = $_SESSION['user_ID'];
-    $sql = "SELECT * FROM goal_and_progress WHERE student_ID = '$student_id'";
+    $sql = "SELECT * FROM goal_and_progress WHERE student_ID = '$student_id' ORDER BY progress_date ASC";
 
 
     $result = $conn->query($sql);
@@ -28,7 +24,7 @@ function viewProgress() {
         }
 
     } else {
-        echo "<tr><td colspan='4'>No records found<td></tr>";
+        echo "<tr><td colspan='4'>No records found</td></tr>";
     }
 }
 ?>

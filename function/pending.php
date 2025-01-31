@@ -35,7 +35,7 @@ function viewPending(){
                     <td>{$row['project_title']}</td>
                     <td>{$row['specialization']}</td>
                     <td>{$row['proposed_by']}</td>
-                    <td>{$row['supervisor_name']}</td>
+                    <td>Dr. {$row['supervisor_name']}</td>
                     <td><a href='{$row['file_address']}' target='_blank'>View</a></td>
                     <td><a href='proposalDetails.php?id={$row['proposal_ID']}' class='modern-button'>Details</a></td>
                   </tr>";

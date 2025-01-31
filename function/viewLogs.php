@@ -1,8 +1,4 @@
 <?php
-require_once 'session.php';
-require_once 'db_connect.php';
-$conn = OpenCon();
-
 function viewLogs() {
     global $conn;
 
@@ -16,10 +12,8 @@ function viewLogs() {
             $file = $row['file_address'];
 
             echo "<li>
-                    <a href='logs/" . basename($file) . "' target='_blank'>" . basename($file) . "</a>
+                    <a href='meeting_log/" . basename($file) . "' target='_blank'>" . basename($file) . "</a>
                   </li>";
-    
-    
         }
 
     } else {

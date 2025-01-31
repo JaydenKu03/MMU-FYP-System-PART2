@@ -1,10 +1,9 @@
 <?php
     require("function/session.php");
     require ('function/db_connect.php');
+    require ('function/check_role.php');
 
-    if($_SESSION['user_role'] != "admin") {
-        die("You Don't Have Access To This Page");
-    }
+    restrict_admin();
 ?>
 
 <!DOCTYPE html>

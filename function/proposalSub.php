@@ -18,6 +18,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $industry = $_POST['industry'];
     $proposed = 'pending';
 
+
+    //Validation for student ID and supervisor ID
+    if($_SESSION['user_role'] == "student") {
+        $sql = "SELECT * FROM supervisor WHERE supervisor_ID = '$supervisor_id'";
+        $result = $conn->query($sql);
+        if($result->num_rows == 0) {
+            echo "<script>alert('No existing supervisor ID');
+                    window.location.href = '../proposal_submission.php';
+            </script>";
+            exit();
+        }
+    }
+    if($_SESSION['user_role'] == "supervisor") {
+        $sql = "SELECT * FROM student WHERE student_ID = '$id'";
+        $result = $conn->query($sql);
+        if($result->num_rows == 0) {
+            echo "<script>alert('No existing student ID');
+                    window.location.href = '../proposal_submission.php';
+            </script>";
+            exit();
+        }
+    }
+
+
     if (isset($_FILES['Proposal']) && $_FILES['Proposal']['error'] == 0) {
         $file_tmp_name = $_FILES['Proposal']['tmp_name'];
         $file_name = $_FILES['Proposal']['name'];

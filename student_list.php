@@ -1,6 +1,9 @@
 <?php
     require ("function/session.php");
     require ('function/db_connect.php');
+    require ('function/check_role.php');
+
+    restrict_admin();
 
     $conn = openCon();
 

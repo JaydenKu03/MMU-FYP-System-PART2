@@ -1,10 +1,9 @@
 <?php
     require("function/session.php");
     require ('function/db_connect.php');
+    require ('function/check_role.php');
 
-    if($_SESSION['user_role'] != "admin") {
-        die("You Don't Have Access To This Page");
-    }
+    restrict_admin();
 
     $conn = openCon();
 ?>
@@ -107,6 +106,7 @@
                                 p.project_specialization,
                                 p.project_category,
                                 p.industry_collaboration,
+                                p.file_address,
                                 p.proposal_status,
                                 u.user_name AS supervisor_name
                             FROM proposal p
@@ -120,7 +120,7 @@
 
                     echo '<section id="fyp-details">';
                     echo '<h2>FYP Details</h2>';
-                    if($rowcount == 1) {
+                    if($rowcount >= 1) {
                         echo '<h3>Title Name</h3>
                               <p>'.$row['project_title'].'</p><br>
                               <h3>Main Supervisor</h3>
@@ -139,6 +139,8 @@
                               <p>'.$row['project_category'].'</p><br>
                               <h3>Industry Collaboration</h3>
                               <p>'.$row['industry_collaboration'].'</p><br>
+                              <h3>My Proposal</h3>
+                              <p><a href = "'.$row['file_address'].'">View</a></p><br>
                               <h3>Title Status</h3>
                               <p>'.$row['proposal_status'].'</p>';
                     }else {

@@ -1,9 +1,4 @@
 <?php
-require_once 'session.php';
-require_once 'db_connect.php';
-
-$conn = OpenCon();
-
 function manageMeetingRequest() {
     global $conn;
 

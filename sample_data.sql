@@ -257,52 +257,52 @@ INSERT INTO `proposal` (
     ('Charlie', 10001, 'Computer Science', 'AI-powered Chatbot for Critical Systems', 
      'Ivy', 50001, 'Jack', 'Student', 
      'Application and Research', 'Computer Science', 'Critical System', 
-     'no', 'proposal//AI_chatbot_proposal.pdf', 'approve'),
+     'no', 'proposal/charlie_proposal.pdf', 'approve'),
 
     ('David', 10002, 'Cybersecurity', 'Advanced Cryptography Methods for Data Security', 
      'Jack', 50002, 'Karen', 'Lecture', 
      'Research', 'Cybersecurity', 'Cryptography and Data Security', 
-     'no', 'proposal//cryptography_proposal.pdf', 'approve'),
+     'no', 'proposal/david_proposal.pdf', 'approve'),
 
     ('Eva', 10003, 'Game Development', 'Immersive Game Design for Virtual Reality', 
      'Karen', 50003, 'Leo', 'Student',
      'Application', 'Game Development', 'Game Design Prototyping (GDP)', 
-     'no', 'proposal//VR_game_design_proposal.pdf', 'pending'),
+     'no', 'proposal/eva_proposal.pdf', 'pending'),
 
     ('Frank', 10004, 'Data Science', 'Data Analytics for Smart Healthcare Systems', 
      'Leo', 50004, 'Ivy', 'Student', 
      'Research', 'Data Science', 'Data Analytics', 
-     'no', 'proposal//data_analytics_healthcare_proposal.pdf', 'approve'),
+     'no', 'proposal/frank_proposal.pdf', 'approve'),
 
     ('Grace', 10005, 'Software Engineering', 'Service-Oriented System for E-Commerce', 
      'Sherif', 50005, 'Jhon', 'Industry', 
      'Application', 'Software Engineering', 'Service Oriented Computing', 
-     'yes', 'proposal/ecommerce_system_proposal.pdf', 'pending'),
+     'yes', 'proposal/grace_proposal.pdf', 'pending'),
     
     ('Hank', 10006, 'Information System', 'IT Infrastructure for Smart Cities', 
      'Sherif', 50005, 'Ivy', 'Lecture', 
      'Application', 'Information System', 'IT Infrastructure', 
-     'yes', 'proposal/IT_infrastructure_proposal.pdf', 'approve'),
+     'yes', 'proposal/hank_proposal.pdf', 'approve'),
 
     ('AbuAbi', 10007, 'Data Science', 'Intelligent Systems for Automated Data Processing', 
      'Karen', 50003, 'Leo', 'Student', 
      'Application and Research', 'Data Science', 'Intelligent Systems', 
-     'no', 'proposal/intelligent_systems_proposal.pdf', 'pending'),
+     'no', 'proposal/abuabi_proposal.pdf', 'pending'),
 
     ('Dom', 10008, 'Game Development', 'Game Algorithm Research for AI NPC Behavior', 
      'Leo', 50004, 'Jack', 'Industry', 
      'Research', 'Game Development', 'Game Algorithm Research (GAR)', 
-     'no', 'proposal/game_algorithm_research_proposal.pdf', 'pending'),
+     'no', 'proposal/dom_proposal.pdf', 'pending'),
 
     ('Vivian', 10009, 'Software Engineering', 'Transaction Processing Systems for Banking', 
      'Ivy', 50001, 'Sherif', 'Student', 
      'Application', 'Software Engineering', 'Transaction Processing Systems', 
-     'no', 'proposal/transaction_processing_proposal.pdf', 'approve'),
+     'no', 'proposal/vivian_proposal.pdf', 'approve'),
 
     ('Kai', 10010, 'Software Engineering', 'Investigation and Analysis of Software Vulnerabilities', 
      'Jhon', 50006, 'Jack', 'Student', 
      'Research', 'Software Engineering', 'Investigation and Analysis', 
-     'no', 'proposal/software_vulnerabilities_proposal.pdf', 'pending');
+     'no', 'proposal/kai_proposal.pdf', 'pending');
 
 -- meeting_record data
 INSERT INTO `meeting_record` (
@@ -319,11 +319,11 @@ INSERT INTO `meeting_record` (
 INSERT INTO `meeting_log` (
     `file_address`, `student_ID`
 ) VALUES
-    ('meeting_log/charlie_meeting_log1.pdf', 10001),
-    ('meeting_log/david_meeting_log1.pdf', 10002),
-    ('meeting_log/frank_meeting_log1.pdf', 10004),
-    ('meeting_log/hank_meeting_log1.pdf', 10006),
-    ('meeting_log/vivian_meeting_log1.pdf', 10009);
+    ('meeting_log/charlie_meetingLog_1.pdf', 10001),
+    ('meeting_log/david_meetingLog_1.pdf', 10002),
+    ('meeting_log/frank_meetingLog_1.pdf', 10004),
+    ('meeting_log/hank_meetingLog_1.pdf', 10006),
+    ('meeting_log/vivian_meetingLog_1.pdf', 10009);
 
 
 -- announcement data

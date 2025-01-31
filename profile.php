@@ -112,7 +112,8 @@
                                 p.project_specialization,
                                 p.project_category,
                                 p.industry_collaboration,
-                                p.proposal_status,
+                                p.file_address,
+                                p.proposal_status,            
                                 u.user_name AS supervisor_name
                             FROM proposal p
                             JOIN supervisor s ON p.supervisor_ID = s.supervisor_ID 
@@ -144,6 +145,8 @@
                               <p>'.$row['project_category'].'</p><br>
                               <h3>Industry Collaboration</h3>
                               <p>'.$row['industry_collaboration'].'</p><br>
+                              <h3>My Proposal</h3>
+                              <p><a href = "'.$row['file_address'].'">View</a></p><br>
                               <h3>Title Status</h3>
                               <p>'.$row['proposal_status'].'</p>';
                     }else {
@@ -152,7 +155,6 @@
                     echo '</section>';
                 }
             ?>
-
             <!-- <section id="reference-details">
                 <h2>Reference</h2>
                 <ul>
