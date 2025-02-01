@@ -43,6 +43,6 @@
 <div class="operation-task">
     <a href="assessment.php">
         <img src="images/submit_assesstment.png" alt="registration">
-        <p>Assesstment Submission</p>
+        <p>Assessment Submission</p>
     </a>
 </div>
