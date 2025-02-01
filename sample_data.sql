@@ -172,18 +172,28 @@ CREATE TABLE `goal_and_progress`(
 -- Table structure for table `assessment`
 --
 
-CREATE TABLE `assessment`(
+CREATE TABLE `assessment` (
     `assessment_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `assessment_date` DATE NOT NULL,
     `program_name` VARCHAR(40) NOT NULL,
-    `file_address` VARCHAR(100) NOT NULL,
+    `assessment_file` VARCHAR(100) NOT NULL,
     `supervisor_ID` INT(10) UNSIGNED NOT NULL,
     `student_ID` INT(10) UNSIGNED NOT NULL,
+    `clarity_objectives` INT(10) UNSIGNED NOT NULL,
+    `understanding_problem` INT(10) UNSIGNED NOT NULL,
+    `quality_methodology` INT(10) UNSIGNED NOT NULL,
+    `technical_implementation` INT(10) UNSIGNED NOT NULL,
+    `innovation` INT(10) UNSIGNED NOT NULL,
+    `quality_report` INT(10) UNSIGNED NOT NULL,
+    `presentation_skills` INT(10) UNSIGNED NOT NULL,
+    `ability_answer_question` INT(10) UNSIGNED NOT NULL,
+    `signature_file` VARCHAR(100) NOT NULL,
+    `Grade` enum('A+','A','A-','B+','B','C+','C','F') NOT NULL,
+
     PRIMARY KEY (`assessment_ID`),
     FOREIGN KEY (`student_ID`) REFERENCES `student`(`student_ID`) ON DELETE CASCADE,
     FOREIGN KEY (`supervisor_ID`) REFERENCES `supervisor`(`supervisor_ID`) ON DELETE CASCADE
 );
-
 
 --
 -- ----------------------- DUMPING DATA -------------------------
@@ -257,52 +267,52 @@ INSERT INTO `proposal` (
     ('Charlie', 10001, 'Computer Science', 'AI-powered Chatbot for Critical Systems', 
      'Ivy', 50001, 'Jack', 'Student', 
      'Application and Research', 'Computer Science', 'Critical System', 
-     'no', 'proposal/charlie_proposal.pdf', 'approve'),
+     'no', 'store_proposal/charlie_proposal.pdf', 'approve'),
 
     ('David', 10002, 'Cybersecurity', 'Advanced Cryptography Methods for Data Security', 
      'Jack', 50002, 'Karen', 'Lecture', 
      'Research', 'Cybersecurity', 'Cryptography and Data Security', 
-     'no', 'proposal/david_proposal.pdf', 'approve'),
+     'no', 'store_proposal/david_proposal.pdf', 'approve'),
 
     ('Eva', 10003, 'Game Development', 'Immersive Game Design for Virtual Reality', 
      'Karen', 50003, 'Leo', 'Student',
      'Application', 'Game Development', 'Game Design Prototyping (GDP)', 
-     'no', 'proposal/eva_proposal.pdf', 'pending'),
+     'no', 'store_proposal/eva_proposal.pdf', 'pending'),
 
     ('Frank', 10004, 'Data Science', 'Data Analytics for Smart Healthcare Systems', 
      'Leo', 50004, 'Ivy', 'Student', 
      'Research', 'Data Science', 'Data Analytics', 
-     'no', 'proposal/frank_proposal.pdf', 'approve'),
+     'no', 'store_proposal/frank_proposal.pdf', 'approve'),
 
     ('Grace', 10005, 'Software Engineering', 'Service-Oriented System for E-Commerce', 
      'Sherif', 50005, 'Jhon', 'Industry', 
      'Application', 'Software Engineering', 'Service Oriented Computing', 
-     'yes', 'proposal/grace_proposal.pdf', 'pending'),
+     'yes', 'store_proposal/grace_proposal.pdf', 'pending'),
     
     ('Hank', 10006, 'Information System', 'IT Infrastructure for Smart Cities', 
      'Sherif', 50005, 'Ivy', 'Lecture', 
      'Application', 'Information System', 'IT Infrastructure', 
-     'yes', 'proposal/hank_proposal.pdf', 'approve'),
+     'yes', 'store_proposal/hank_proposal.pdf', 'approve'),
 
     ('AbuAbi', 10007, 'Data Science', 'Intelligent Systems for Automated Data Processing', 
      'Karen', 50003, 'Leo', 'Student', 
      'Application and Research', 'Data Science', 'Intelligent Systems', 
-     'no', 'proposal/abuabi_proposal.pdf', 'pending'),
+     'no', 'store_proposal/abuabi_proposal.pdf', 'pending'),
 
     ('Dom', 10008, 'Game Development', 'Game Algorithm Research for AI NPC Behavior', 
      'Leo', 50004, 'Jack', 'Industry', 
      'Research', 'Game Development', 'Game Algorithm Research (GAR)', 
-     'no', 'proposal/dom_proposal.pdf', 'pending'),
+     'no', 'store_proposal/dom_proposal.pdf', 'pending'),
 
     ('Vivian', 10009, 'Software Engineering', 'Transaction Processing Systems for Banking', 
      'Ivy', 50001, 'Sherif', 'Student', 
      'Application', 'Software Engineering', 'Transaction Processing Systems', 
-     'no', 'proposal/vivian_proposal.pdf', 'approve'),
+     'no', 'store_proposal/vivian_proposal.pdf', 'approve'),
 
     ('Kai', 10010, 'Software Engineering', 'Investigation and Analysis of Software Vulnerabilities', 
      'Jhon', 50006, 'Jack', 'Student', 
      'Research', 'Software Engineering', 'Investigation and Analysis', 
-     'no', 'proposal/kai_proposal.pdf', 'pending');
+     'no', 'store_proposal/kai_proposal.pdf', 'pending');
 
 -- meeting_record data
 INSERT INTO `meeting_record` (
@@ -319,11 +329,11 @@ INSERT INTO `meeting_record` (
 INSERT INTO `meeting_log` (
     `file_address`, `student_ID`
 ) VALUES
-    ('meeting_log/charlie_meetingLog_1.pdf', 10001),
-    ('meeting_log/david_meetingLog_1.pdf', 10002),
-    ('meeting_log/frank_meetingLog_1.pdf', 10004),
-    ('meeting_log/hank_meetingLog_1.pdf', 10006),
-    ('meeting_log/vivian_meetingLog_1.pdf', 10009);
+    ('store_meeting_log/charlie_meetingLog_1.pdf', 10001),
+    ('store_meeting_log/david_meetingLog_1.pdf', 10002),
+    ('store_meeting_log/frank_meetingLog_1.pdf', 10004),
+    ('store_meeting_log/hank_meetingLog_1.pdf', 10006),
+    ('store_meeting_log/vivian_meetingLog_1.pdf', 10009);
 
 
 -- announcement data
@@ -348,3 +358,10 @@ INSERT INTO `goal_and_progress` (
     ('2024-12-11', 'Data collection completed', 'Perform data analysis', 'Impressive dataset preparation', 10004),
     ('2024-12-13', 'Infrastructure plan drafted', 'Implement network simulation', 'Thorough analysis provided', 10006),
     ('2024-11-13', 'System design completed', 'Begin coding transactions', 'Comprehensive design', 10009);
+
+
+-- goal_and_progress data
+INSERT INTO `assessment` (
+    `assessment_date`, `program_name`, `assessment_file`, `supervisor_ID`, `student_ID`, `clarity_objectives`, `understanding_problem`, `quality_methodology`, `technical_implementation`, `innovation`, `quality_report`, `presentation_skills`, `ability_answer_question`, `signature_file`, `Grade`
+) VALUES
+    ('2025-01-31', 'Information System', 'kai_assessment.pdf', 50006, 10010, 5, 5, 4, 7, 6, 8, 5, 6, 'signature.jpg', 'C+');

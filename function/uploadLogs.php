@@ -12,13 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $file_name = $_FILES['file']['name'];
         $file_type = $_FILES['file']['type'];
 
-        $upload_dir = __DIR__ . '/../meeting_log/';  
+        $upload_dir = __DIR__ . '/../store_meeting_log/';  
         $file_path = $upload_dir . basename($file_name);
 
         // Check if file is a PDF (optional validation)
         if ($file_type == "application/pdf") {
             if (move_uploaded_file($file_tmp_name, $file_path)) {
-                $db_file_path = 'meeting_log/' . basename($file_name);
+                $db_file_path = 'store_meeting_log/' . basename($file_name);
                 $sql = "INSERT INTO meeting_log (file_address, student_ID) VALUES ('$db_file_path', '$student_id')";
                 
                 if ($conn->query($sql)) {

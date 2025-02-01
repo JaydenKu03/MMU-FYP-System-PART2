@@ -98,6 +98,10 @@
     background-color: #17cf335d;
 }
 
+#rejected-table th{
+    background-color: #9c24245d;
+}
+
 #pending-table th{
     background-color: #9190905d;
 }

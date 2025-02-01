@@ -1,3 +1,10 @@
+<?php
+    require("function/session.php");
+    require ('function/check_role.php');
+
+    restrict_admin(); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,12 +24,9 @@
 
     <div class="container">
         <h1 class="title-font">Admin and Supervisor Registration</h1>
-        <form action="/register.php" method="get">
+        <form action="function/insert_registration.php" method="POST">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="John Smith" required />
-
-            <label for="id">ID</label>
-            <input type="text" id="id" name="id" placeholder="0123456789" required />
 
             <label for="email">Password</label>
             <input type="password" id="password" name="password" required />
@@ -40,7 +44,7 @@
             </select>
 
             <div class="button-container">
-                <button type="submit" class="modern-button">Register</button>
+                <button type="submit" name="submit"class="modern-button">Register</button>
                 <button type="reset" class="modern-button">Reset</button>
             </div>
         </form>

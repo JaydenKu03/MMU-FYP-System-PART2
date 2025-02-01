@@ -1,3 +1,12 @@
+<?php
+    require("function/session.php");
+    require ('function/db_connect.php');
+    require ('function/check_role.php');
+
+    restrict_admin();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +26,6 @@
         <h2 class="title">Proposal Details</h2>
 
         <?php
-        require_once 'function/db_connect.php';
         $conn = OpenCon();
 
         if (isset($_GET['id'])) {

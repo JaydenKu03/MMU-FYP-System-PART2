@@ -1,3 +1,12 @@
+<?php
+    require ('function/session.php');
+    require ('function/db_connect.php');
+    require ('function/insert_supervised.php');
+    require ('function/check_role.php');
+
+    restrict_supervisor();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,73 +29,47 @@
         <div class="supervisor-container">
             <img src="images/file.png" alt="profile picture" title="user profile picture">
             <ul>
-                <li>Supervisor Name:</li>
-                <li>MUHAMMAD Al-Amin</li>
+                <li><strong>Supervisor Name:</strong></li>
+                <li><?php echo $_SESSION["user_name"]; ?></li>
             </ul>
             <ul>
-                <li>Total supervised Student:</li>
-                <li>3</li>
+                <li><strong>Total supervised Student:</strong></li>
+                <li>
+                    <?php
+                    echo $row1['total_students'];
+                    ?>
+                </li>
+            </ul>
+            <ul>
+                <li><strong>ID:</strong></li>
+                <li><?php echo $_SESSION["user_ID"]; ?></li>
             </ul>
         </div>
-
         <div class="supervised-container">
-            <div class="student-info">
+        <?php 
+    while ($row2 = mysqli_fetch_assoc($result2)) {
+        echo '<div class="student-info">
                 <ul>
-                    <li>Student Name:</li>
-                    <li>Deka</li>
+                    <li><strong>Student Name:</strong></li>
+                    <li>' . $row2['student_name'] . '</li>
                 </ul>
                 <ul>
-                    <li>Project Title:</li>
-                    <li>Beli TRX</li>
+                    <li><strong>Project Title:</strong></li>
+                    <li>' . $row2['project_title'] . '</li>
                 </ul>
                 <ul>
-                    <li>Student ID:</li>
-                    <li>12XXXXXX</li>
+                    <li><strong>Student ID:</strong></li>
+                    <li>' . $row2['student_ID'] . '</li>
                 </ul>
                 <ul>
-                    <li>Assessment Status:</li>
-                    <li>Pending</li>
+                    <li><strong>Assessment Grade:</strong></li>
+                    <li>' . $row2['final_grade'] . '</li>
                 </ul>
-            </div>
-            <div class="student-info">
-                <ul>
-                    <li>Student Name:</li>
-                    <li>Donald Trump</li>
-                </ul>
-                <ul>
-                    <li>Project Title:</li>
-                    <li>Become president</li>
-                </ul>
-                <ul>
-                    <li>Student ID:</li>
-                    <li>12XXXXXX</li>
-                </ul>
-                <ul>
-                    <li>Assessment Status:</li>
-                    <li>Pending</li>
-                </ul>
-            </div>
-            <div class="student-info"> 
-            <a href="student-bio.html">
-                <ul>
-                    <li>Student Name:</li>
-                    <li>Elon Musk</li>
-                </ul>
-                <ul>
-                    <li>Project Title:</li>
-                    <li>Buy Plenet Mars</li>
-                </ul>
-                <ul>
-                    <li>Student ID:</li>
-                    <li>12XXXXXX</li>
-                </ul>
-                <ul>
-                    <li>Assessment Status:</li>
-                    <li>Pending</li>
-                </ul>
-            </a>
-            </div>
-        </div>
+              </div>';
+    } 
+    ?>
+    </div>
+
     </div>
 
     <?php

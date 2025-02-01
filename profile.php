@@ -146,7 +146,7 @@
                               <h3>Industry Collaboration</h3>
                               <p>'.$row['industry_collaboration'].'</p><br>
                               <h3>My Proposal</h3>
-                              <p><a href = "'.$row['file_address'].'">View</a></p><br>
+                              <p><a href = "'.$row['file_address'].'" target="_blank">View</a></p><br>
                               <h3>Title Status</h3>
                               <p>'.$row['proposal_status'].'</p>';
                     }else {
@@ -155,13 +155,6 @@
                     echo '</section>';
                 }
             ?>
-            <!-- <section id="reference-details">
-                <h2>Reference</h2>
-                <ul>
-                    <li><a href="">My Meeting Logs</a></li>
-                    <li><a href="#">My Goal and Progress</a></li>
-                </ul>
-            </section> -->
         </div>
     </div>
 

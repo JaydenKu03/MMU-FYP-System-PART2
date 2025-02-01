@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $conn->query($sql);
         if($result->num_rows == 0) {
             echo "<script>alert('No existing supervisor ID');
-                    window.location.href = '../proposal_submission.php';
+                   window.location.href = '../proposal_submission.php';</script>;
             </script>";
             exit();
         }
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $file_size = $_FILES['Proposal']['size'];
         $file_type = $_FILES['Proposal']['type'];
 
-        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/MMU-FYP-System-PART2-main/proposals/';
+        $upload_dir = __DIR__ . '/../store_proposal/';  
         $file_path = $upload_dir . basename($file_name);
 
         // Check if the file is a PDF (optional validation)
@@ -59,8 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (move_uploaded_file($file_tmp_name, $file_path)) {
                 // Insert the data into the database
+                $db_file_path = 'store_proposal/' . basename($file_name);
                 $sql = "INSERT INTO proposal (student_name, student_ID, specialization, project_title, supervisor_name, supervisor_ID, co_supervisor_name, proposed_by, project_type, project_specialization, project_category, industry_collaboration, file_address, proposal_status) 
-                        VALUES ('$name', '$id', '$specialization', '$title', '$supervisor', '$supervisor_id', '$cosupervisor', '$status', '$type', '$project_specialization', '$category', '$industry', '$file_path', '$proposed')";
+                        VALUES ('$name', '$id', '$specialization', '$title', '$supervisor', '$supervisor_id', '$cosupervisor', '$status', '$type', '$project_specialization', '$category', '$industry', '$db_file_path', '$proposed')";
 
                 if ($conn->query($sql)) {
                     echo "<script>alert('Proposal submitted successfully!'); 

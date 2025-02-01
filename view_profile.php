@@ -87,7 +87,7 @@
                             echo '<li>'.$row['student_ID'].' - '.$row['user_name'].'</li>';
                         }
                     }else {
-                        echo "<li>No student is under your supervision currently</li>";
+                        echo "<li>No student is under supervision currently</li>";
                     }
                     echo '</ul>';
                     echo '</section>';
@@ -140,7 +140,7 @@
                               <h3>Industry Collaboration</h3>
                               <p>'.$row['industry_collaboration'].'</p><br>
                               <h3>My Proposal</h3>
-                              <p><a href = "'.$row['file_address'].'">View</a></p><br>
+                              <p><a href = "'.$row['file_address'].'" target="_blank">View</a></p><br>
                               <h3>Title Status</h3>
                               <p>'.$row['proposal_status'].'</p>';
                     }else {

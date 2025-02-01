@@ -12,7 +12,7 @@ function viewLogs() {
             $file = $row['file_address'];
 
             echo "<li>
-                    <a href='meeting_log/" . basename($file) . "' target='_blank'>" . basename($file) . "</a>
+                    <a href='$file' target='_blank'>" . basename($file) . "</a>
                   </li>";
         }
 

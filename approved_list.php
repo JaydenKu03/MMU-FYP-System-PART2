@@ -1,3 +1,7 @@
+<?php
+    require("function/session.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

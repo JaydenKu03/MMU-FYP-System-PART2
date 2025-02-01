@@ -1,3 +1,7 @@
+<?php
+    require("function/session.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +22,7 @@
     <div class="content-container">
         <div class="filter-container">
             <h2>Filters: </h2>
-            <form method="GET" action="approved_list.php">
+            <form method="GET" action="rejected_list.php">
                 <label for="searchName">Name:</label>
                 <input type="search" id="searchName" name="searchName" placeholder="Search Name...">
                 <label for="searchSupervisor">Supervisor:</label>
@@ -41,7 +45,7 @@
 
         <div class="table-container">
             <h1>Rejected FYP Title List</h1>
-            <table id="approved-table" class="modern-table">
+            <table id="rejected-table" class="modern-table">
                 <thead>
                     <tr>
                         <th>Student ID</th>

@@ -11,6 +11,12 @@
     </a>
 </div>
 <div class="operation-task">
+    <a href="rejected_list.php">
+        <img src="images/rejected.png" alt="rejected_list">
+        <p>Rejected Project</p>
+    </a>
+</div>
+<div class="operation-task">
     <a href="meeting.php">
         <img src="images/submit_meeting.png" alt="pending_list">
         <p>Meeting Management</p>
