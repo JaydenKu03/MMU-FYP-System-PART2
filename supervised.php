@@ -65,6 +65,12 @@
                     <li><strong>Assessment Grade:</strong></li>
                     <li>' . $row2['final_grade'] . '</li>
                 </ul>
+                <ul>
+            <li><strong>Assessment File:</strong></li>
+            <li>
+                <a href="store_assessment/' . $row2['assessment_file'] . '" download>' . $row2['assessment_file'] . '</a>
+            </li>
+        </ul>
               </div>';
     } 
     ?>

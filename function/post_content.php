@@ -33,6 +33,12 @@
         $post_by = $_SESSION['user_name'];
         $admin_ID = $_SESSION['user_ID'];
 
+        $current_date = date("Y-m-d");
+        if (strtotime($date) < strtotime($current_date)) {
+            echo '<script>alert("Invalid Date"); window.location.href="../announcement.php";</script>';
+            exit();
+        }
+
         if(!empty($date) && !empty($title) && !empty($post_by) && !empty($admin_ID)) {
             $conn = openCon();
             $sql = "INSERT INTO event (`post_by`, `event_date`, `event_title`, `admin_ID`)
@@ -48,6 +54,6 @@
             echo '<script>alert("Cannot Post Empty Event!"); window.location.href="../announcement.php";</script>';
         }
     }else {
-        '<script>alert("Submisstion Error"); window.location.href="../announcement.php";</script>';
+        '<script>alert("Submission Error"); window.location.href="../announcement.php";</script>';
     }
 ?>

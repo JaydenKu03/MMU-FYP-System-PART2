@@ -20,7 +20,8 @@ if (!$result1) {
 
 // Fetch student details along with assessment grade
 $query2 = "SELECT p.student_ID, p.student_name, p.project_title, 
-                  COALESCE(a.Grade, 'Pending') AS final_grade
+                  COALESCE(a.Grade, 'Pending') AS final_grade,
+                  COALESCE(a.assessment_file, 'No File') AS assessment_file
            FROM proposal p
            LEFT JOIN assessment a ON p.student_ID = a.student_ID
            WHERE p.supervisor_ID = $supervisor_ID AND p.proposal_status = 'approve'";

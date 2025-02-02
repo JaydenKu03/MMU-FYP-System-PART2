@@ -23,9 +23,9 @@
     </a>
 </div>
 <div class="operation-task">
-    <a href="student_list.php">
-        <img src="images/student.png" alt="student_list">
-        <p>Student List</p>
+    <a href="user_list.php">
+        <img src="images/student.png" alt="user_list">
+        <p>User List</p>
     </a>
 </div>
 <div class="operation-task">

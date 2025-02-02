@@ -52,39 +52,7 @@
     <?php
         include "template/footer.php";
     ?>    
-
-    <script >
-        const announcementTab = document.getElementById('announcement-tab');
-        const eventTab = document.getElementById('event-tab');
-        const announcementForm = document.getElementById('announcement-form');
-        const eventForm = document.getElementById('event-form');
-        const eventDate = document.getElementById('event_date');
-
-        announcementTab.addEventListener('click', () => {
-            announcementTab.classList.add('active-tab');
-            eventTab.classList.remove('active-tab');
-            announcementForm.classList.add('active-form');
-            eventForm.classList.remove('active-form');
-        });
-
-        eventTab.addEventListener('click', () => {
-            eventTab.classList.add('active-tab');
-            announcementTab.classList.remove('active-tab');
-            eventForm.classList.add('active-form');
-            announcementForm.classList.remove('active-form');
-        });
-
-        eventDate.addEventListener('change', function () {
-            const selectedDate = new Date(this.value); 
-            const today = new Date(); 
-            today.setHours(0, 0, 0, 0);
-
-            if (selectedDate < today) {
-                alert("Cannot choose a past date.");
-                this.value = '';
-            }
-        });
-    </script>
+    <script src = "static/announcement.js"></script>
 </body>
 
 </html>
